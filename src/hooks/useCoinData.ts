@@ -14,7 +14,7 @@ export const useCoinData = (pollingInterval: number | null = 30000) => {
       setData(result);
       setError(null);
     } catch (err: any) {
-      setError(err.message || 'Failed to fetch data');
+      setError(err.message || 'Limit aşıldı');
     } finally {
       setLoading(false);
     }
