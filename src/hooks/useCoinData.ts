@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { fetchCoinData } from '@/lib/api';
 import { CoinData } from '@/lib/types';
 
-export const useCoinData = (pollingInterval = 30000) => {
+export const useCoinData = (pollingInterval: number | null = 30000) => {
   const [data, setData] = useState<CoinData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +22,8 @@ export const useCoinData = (pollingInterval = 30000) => {
 
   useEffect(() => {
     fetchData();
+
+    if (pollingInterval === null) return;
 
     const intervalId = setInterval(fetchData, pollingInterval);
 
