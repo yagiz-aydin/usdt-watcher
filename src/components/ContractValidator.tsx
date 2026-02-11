@@ -6,6 +6,10 @@ import { twMerge } from "tailwind-merge";
 interface ContractValidatorProps {
   platforms?: { [key: string]: string };
   loading: boolean;
+  title?: string;
+  badgeText?: string;
+  copyTitle?: string;
+  viewTitle?: string;
 }
 
 const EXPLORERS: { [key: string]: string } = {
@@ -26,7 +30,14 @@ const DISPLAY_NAMES: { [key: string]: string } = {
     avalanche: 'Avalanche',
 }
 
-export const ContractValidator: React.FC<ContractValidatorProps> = ({ platforms, loading }) => {
+export const ContractValidator: React.FC<ContractValidatorProps> = ({ 
+    platforms, 
+    loading,
+    title = "Contract Validator",
+    badgeText = "Official",
+    copyTitle = "Copy Address",
+    viewTitle = "View on Explorer"
+}) => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>('ethereum');
   const [copied, setCopied] = useState(false);
 
@@ -55,9 +66,9 @@ export const ContractValidator: React.FC<ContractValidatorProps> = ({ platforms,
   return (
     <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-800 w-full max-w-2xl mt-6">
       <h2 className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-4 uppercase tracking-wider flex items-center gap-2">
-        Contract Validator
+        {title}
         <span className="text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 px-2 py-0.5 rounded-full">
-            Official
+            {badgeText}
         </span>
       </h2>
 
@@ -106,7 +117,7 @@ export const ContractValidator: React.FC<ContractValidatorProps> = ({ platforms,
                  <button
                     onClick={handleCopy}
                     className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-                    title="Copy Address"
+                    title={copyTitle}
                  >
                     {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                  </button>
@@ -115,7 +126,7 @@ export const ContractValidator: React.FC<ContractValidatorProps> = ({ platforms,
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-                    title="View on Explorer"
+                    title={viewTitle}
                  >
                     <ExternalLink className="w-4 h-4" />
                  </a>

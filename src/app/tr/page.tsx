@@ -15,10 +15,10 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       <header className="mb-10 text-center space-y-2">
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
-          USDT Watcher
+          USDT İzleyici
         </h1>
         <p className="text-neutral-500 dark:text-neutral-400 max-w-xl mx-auto">
-          High-precision volatility tracker and contract validator for Tether (USDT).
+          Tether (USDT) için yüksek hassasiyetli volatilite takipçisi ve kontrat doğrulayıcısı.
         </p>
       </header>
 
@@ -30,7 +30,7 @@ export default function Home() {
                 <button 
                     onClick={refetch}
                     className="ml-auto p-1 hover:bg-red-100 dark:hover:bg-red-800 rounded transition-colors"
-                    title="Try again"
+                    title="Tekrar dene"
                 >
                     <RefreshCcw className="w-4 h-4" />
                 </button>
@@ -46,17 +46,18 @@ export default function Home() {
             }}
             className="text-sm border border-neutral-300 dark:border-neutral-700 rounded px-2 py-1 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="10000">10s</option>
-            <option value="30000">30s</option>
-            <option value="60000">1m</option>
-            <option value="manual">Manual</option>
+            <option value="5000">5sn</option>
+            <option value="10000">10sn</option>
+            <option value="30000">30sn</option>
+            <option value="60000">1dk</option>
+            <option value="manual">Manuel</option>
           </select>
           
           <button
             onClick={refetch}
             disabled={loading}
             className="p-2 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
-            title="Reload Data"
+            title="Veriyi Yenile"
           >
             <RefreshCcw className={`w-4 h-4 text-neutral-600 dark:text-neutral-400 ${loading ? 'animate-spin' : ''}`} />
           </button>
@@ -65,24 +66,30 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
           <PriceCard 
             price={data?.market_data?.current_price?.usd} 
-            loading={loading} 
+            loading={loading}
+            title="Güncel Fiyat (USD)"
           />
           <VolatilityCard 
             change24h={data?.market_data?.price_change_24h}
             percentage24h={data?.market_data?.price_change_percentage_24h}
             loading={loading}
+            title="24sa Volatilite"
           />
         </div>
 
         <ContractValidator 
             platforms={data?.platforms}
             loading={loading}
+            title="Kontrat Doğrulayıcı"
+            badgeText="Resmi"
+            copyTitle="Adresi Kopyala"
+            viewTitle="Explorer'da Görüntüle"
         />
 
         <div className="text-xs text-neutral-400 dark:text-neutral-600 mt-12 text-center w-full max-w-md">
-            Data provided by CoinGecko API.
+            Veriler CoinGecko API tarafından sağlanmaktadır. Her 30 saniyede bir otomatik güncellenir.
             <br />
-            Last updated: {data?.last_updated ? new Date(data.last_updated).toLocaleString() : 'Never'}
+            Son güncelleme: {data?.last_updated ? new Date(data.last_updated).toLocaleString('tr-TR') : 'Asla'}
         </div>
       </main>
     </div>

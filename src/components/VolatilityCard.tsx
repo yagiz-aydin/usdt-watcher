@@ -6,9 +6,10 @@ interface VolatilityCardProps {
   change24h?: number;
   percentage24h?: number;
   loading: boolean;
+  title?: string;
 }
 
-export const VolatilityCard: React.FC<VolatilityCardProps> = ({ change24h, percentage24h, loading }) => {
+export const VolatilityCard: React.FC<VolatilityCardProps> = ({ change24h, percentage24h, loading, title = "24h Volatility" }) => {
   const isPositive = percentage24h && percentage24h > 0;
   const isNegative = percentage24h && percentage24h < 0;
   const isNeutral = !percentage24h || percentage24h === 0;
@@ -16,7 +17,7 @@ export const VolatilityCard: React.FC<VolatilityCardProps> = ({ change24h, perce
   return (
     <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-800 w-full max-w-sm">
       <h2 className="text-neutral-500 dark:text-neutral-400 text-sm font-medium mb-2 uppercase tracking-wider">
-        24h Volatility
+        {title}
       </h2>
       
       {loading ? (
