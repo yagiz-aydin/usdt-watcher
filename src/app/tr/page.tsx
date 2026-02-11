@@ -46,7 +46,6 @@ export default function Home() {
             }}
             className="text-sm border border-neutral-300 dark:border-neutral-700 rounded px-2 py-1 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="5000">5sn</option>
             <option value="10000">10sn</option>
             <option value="30000">30sn</option>
             <option value="60000">1dk</option>
